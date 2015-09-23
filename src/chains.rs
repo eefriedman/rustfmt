@@ -126,7 +126,10 @@ pub fn rewrite_chain(mut expr: &ast::Expr,
         &connector[..]
     };
 
-    Some(format!("{}{}{}", parent_rewrite, first_connector, rewrites.join(&connector)))
+    Some(format!("{}{}{}",
+                 parent_rewrite,
+                 first_connector,
+                 rewrites.join(&connector)))
 }
 
 fn pop_expr_chain<'a>(expr: &'a ast::Expr) -> Option<&'a ast::Expr> {
@@ -154,7 +157,13 @@ fn rewrite_chain_expr(expr: &ast::Expr,
                 block_indent: offset,
                 ..*context
             };
-            rewrite_method_call(method_name.node, types, expressions, span, inner, width, offset)
+            rewrite_method_call(method_name.node,
+                                types,
+                                expressions,
+                                span,
+                                inner,
+                                width,
+                                offset)
         }
         ast::Expr_::ExprField(_, ref field) => {
             Some(format!(".{}", field.node))

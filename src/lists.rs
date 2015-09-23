@@ -234,7 +234,10 @@ pub fn write_list<'b>(items: &[ListItem], formatting: &ListFormatting<'b>) -> Op
         }
 
         let max_width = formatting.indent.width() + formatting.v_width;
-        let item_str = wrap_str(&item.item[..], max_width, formatting.v_width, formatting.indent);
+        let item_str = wrap_str(&item.item[..],
+                                max_width,
+                                formatting.v_width,
+                                formatting.indent);
         result.push_str(&&try_opt!(item_str));
 
         // Post-comments
